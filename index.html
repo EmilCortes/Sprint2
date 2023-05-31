@@ -375,7 +375,7 @@
                         <div class="d-flex flex-column justify-content-between pb-3 flex-lg-row">
                             <div class="me-3 col-sm-12 col-lg-8">
                                 <input type="email" class="form-control mb-sm-2 mb-lg-auto" id="userEmail"
-                                    aria-describedby="emailHelp" placeholder="Enter your e-mail adress">
+                                    aria-describedby="emailHelp" placeholder="Enter your e-mail adress" required>
                             </div>
                             <div class="valid-feedback">Is a valid E-mail.</div>
                             <div class="invalid-feedback">Is not an E-mail.</div>
@@ -417,7 +417,8 @@
             </div>
         </div>
     </footer>
-    <script>(function () {
+    <script>
+    (function () {
             'use strict'
 
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -430,6 +431,17 @@
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()
+                        } else {
+                            var emailInput = form.querySelector('#userEmail');
+                    if (emailInput && emailInput.value === '') {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                        var emailErrorElement = document.querySelector('#emailError');
+                        if (emailErrorElement) {
+                            emailErrorElement.textContent = 'Please enter your email.';
+                        }
+                    }
                         }
 
                         form.classList.add('was-validated')
